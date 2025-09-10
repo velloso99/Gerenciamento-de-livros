@@ -29,6 +29,7 @@ con.execute('CREATE TABLE emprestimos(\
                 id_usuario INTEGER,\
                 data_emprestimo TEXT,\
                 data_devolucao TEXT,\
-                FOREIGN KEY (id_livro) REFERENCES livros(id),\)')
+            FOREIGN KEY (id_livro) REFERENCES livros(id),\
+            FOREIGN KEY (id_usuario) REFERENCES usuarios(id))')
 
 
