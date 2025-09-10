@@ -25,7 +25,7 @@ def exibir_livros():
     livros = conn.execute("SELECT * FROM livros").fetchall()
     conn.close()
 
-    if not livro:
+    if not livros:
         print("Nenhum livro encontrado na biblioteca")
         return
     print("livros na biblioteca")
@@ -56,16 +56,14 @@ def get_books_on_loan():
     conn.close()
     return result
 
+# Função para atualizar a data de devolução
+def upload_loang_return_date(id_emprestimo, data_devolucao):
+    conn =connect()
+    conn.execute("UPDATE emprestimos SET data_devolucao =? WHERE id=?",(id_emprestimo, data_devolucao))
+    conn.commit()
+    conn.close()
 
 
 
-
-
-#Exemplo de das funções
-#insert_book("Dom Quixote", "Miquel", "Editora 1",1605 , "12345")
-#insert_user("Joao", "Silva", "Manoel Cardoso,185","joao@gmail.com", "+24455")
-insert_loan(1, 1, "20-9-2025", None)
-print(get_books_on_loan())
-exibir_livros()
 
 
