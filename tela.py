@@ -51,10 +51,24 @@ app_logo.place(x=5, y=0)
 app_= Label(frame_cima, text="Sistema de Gerencimento de Livros",compound=LEFT, padx=5, anchor=NW, font=('Verdana 15 bold'),bg=co6, fg=co1)
 app_.place(x=50, y=7)
 
+app_linha= Label(frame_cima,width=770, height=1, padx=5, anchor=NW, font=('Verdana 1'),bg=co3, fg=co1)
+app_linha.place(x=0, y=47)
 
+#########################################################################################################
+# Menu
+# Abrir imagem novo usuario
+img_usuario = Image.open('img/add.png')
+img_usuario = img_usuario .resize((18,18))
+img_usuario = ImageTk.PhotoImage(img_usuario )
+b_usuario =Button(frame_esquerda, image=img_usuario, compound=LEFT, anchor=NW, text=' Novo Usuario', bg=co4, fg=co1, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+b_usuario.grid(row=0, column=0, sticky=NSEW, padx=5, pady=6)
 
-
-
+# Abrir imagem novo livro
+img_livro = Image.open('img/add.png')
+img_livro = img_livro .resize((18,18))
+img_livro = ImageTk.PhotoImage(img_livro )
+b_livro =Button(frame_esquerda, image=img_livro, compound=LEFT, anchor=NW, text=' Novo Livro', bg=co4, fg=co1, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+b_livro.grid(row=1, column=0, sticky=NSEW, padx=5, pady=6)
 
 
 
