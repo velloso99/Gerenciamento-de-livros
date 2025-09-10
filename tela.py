@@ -42,7 +42,7 @@ frame_direita.grid(row=1, column=1, sticky=NSEW)
 #################################################################################################
 # Logo 
 # Abrir imagem
-app_img = Image.open('img/logo 2.png')
+app_img = Image.open('img/logo.png')
 app_img = app_img.resize((40,40))
 app_img = ImageTk.PhotoImage(app_img)
 
