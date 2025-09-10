@@ -1,5 +1,6 @@
 from tkinter .ttk import*
 from  tkinter import *
+from PIL import Image, ImageTk
 
 from colors import *
 
@@ -38,10 +39,17 @@ frame_esquerda.grid(row=1, column=0,sticky=NSEW)
 frame_direita= Frame(janela, width=600, height=265, bg=co1, relief="raised")
 frame_direita.grid(row=1, column=1, sticky=NSEW)
 
+#################################################################################################
+# Logo 
+# Abrir imagem
+app_img = Image.open('img/logo 2.png')
+app_img = app_img.resize((40,40))
+app_img = ImageTk.PhotoImage(app_img)
 
-
-
-
+app_logo= Label(frame_cima, image=app_img, width=1000, compound=LEFT, padx=5, anchor=NW,bg=co6, fg=co1)
+app_logo.place(x=5, y=0)
+app_= Label(frame_cima, text="Sistema de Gerencimento de Livros",compound=LEFT, padx=5, anchor=NW, font=('Verdana 15 bold'),bg=co6, fg=co1)
+app_.place(x=50, y=7)
 
 
 
