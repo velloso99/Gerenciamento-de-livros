@@ -25,11 +25,11 @@ con.execute('CREATE TABLE usuarios( \
 #Criando tabela de emprestimo
 con.execute('CREATE TABLE emprestimos(\
                 id INTEGER PRIMARY KEY,\
-                id_livro INTEGER,\
-                id_usuario INTEGER,\
+                id_livros INTEGER,\
+                id_usuarios INTEGER,\
                 data_emprestimo TEXT,\
                 data_devolucao TEXT,\
-            FOREIGN KEY (id_livro) REFERENCES livros(id),\
-            FOREIGN KEY (id_usuario) REFERENCES usuarios(id))')
+            FOREIGN KEY (id_livros) REFERENCES livros(id),\
+            FOREIGN KEY (id_usuarios) REFERENCES usuarios(id))')
 
 

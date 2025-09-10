@@ -13,9 +13,9 @@ def insert_book(titulo, autor, editora, ano_publicacao ,isbn):
     conn.close()
 
 # Função para inserir novo usuarios
-def insert_user(nome, sobrenome, endereco, email,telefone):
+def insert_user(nome, sobrenome, endereco, email, contato):
     conn = connect()
-    conn.execute("INSERT INTO usuarios(nome, sobrenome, endereco, email,telefone) values(?,?,?,?,?)", (nome, sobrenome, endereco, email,telefone))
+    conn.execute("INSERT INTO usuarios(nome, sobrenome, endereco, email, contato) values(?,?,?,?,?)", (nome, sobrenome, endereco, email, contato))
     conn.commit()
     conn.close()
 
@@ -25,11 +25,11 @@ def exibir_livros():
     livros = conn.execute("SELECT * FROM livros").fetchall()
     conn.close()
 
-    if not livros:
+    if not livro:
         print("Nenhum livro encontrado na biblioteca")
         return
     print("livros na biblioteca")
-    for livro in livro:
+    for livro in livros:
         print(f"id: {livro[0]}")
         print(f"titulo: {livro[1]}")
         print(f"Autor: {livro[2]}")
@@ -41,7 +41,7 @@ def exibir_livros():
 # Função para realizar eprestimos
 def insert_loan(id_livro, id_usuario, data_emprestimo, data_devolucao):
     conn = connect()
-    conn.execute("INSERT INTO emsprestimos(id_livro, id_usuario, data_emprestimo, data_devolucao) values(?,?,?,?)" ,(id_livro, id_usuario, data_emprestimo, data_devolucao))
+    conn.execute("INSERT INTO emprestimos(id_livros, id_usuarios, data_emprestimo, data_devolucao) values(?,?,?,?)" ,(id_livro, id_usuario, data_emprestimo, data_devolucao))
     conn.commit()
     conn.close()
 
@@ -50,9 +50,9 @@ def get_books_on_loan():
     conn = connect()
     result = conn.execute("SELECT livros.titulo, usuarios.nome, usuarios.sobrenome, emprestimos.data_emprestimo, emprestimos.data_devolucao\
                             FROM livros\
-                            INNER JOIN emprestimos ON livros.id = emprestimos.id_livro\
-                            INNER JOIN usuarios ON usarios.id = emprestimos.id_suario\
-                             WHERE emprestimos.data_devolucao IS NULL").fetchall()
+                            INNER JOIN emprestimos ON livros.id = emprestimos.id_livros\
+                            INNER JOIN usuarios ON usuarios.id = emprestimos.id_usuarios\
+                            WHERE emprestimos.data_devolucao IS NULL").fetchall()
     conn.close()
     return result
 
@@ -64,6 +64,8 @@ def get_books_on_loan():
 #Exemplo de das funções
 #insert_book("Dom Quixote", "Miquel", "Editora 1",1605 , "12345")
 #insert_user("Joao", "Silva", "Manoel Cardoso,185","joao@gmail.com", "+24455")
-#exibir_livros()
+insert_loan(1, 1, "20-9-2025", None)
+print(get_books_on_loan())
+exibir_livros()
 
 
