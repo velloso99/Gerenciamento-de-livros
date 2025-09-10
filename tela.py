@@ -30,7 +30,25 @@ Style.theme_use("clam")
 # Frames
 
 frame_cima= Frame(janela, width=770, height=50, bg=co6, relief="flat")
-frame_cima.grid(row=0 , column=0, columnspan=2, sticky=NSEW)
+frame_cima.grid(row=0, column=0, columnspan=2, sticky=NSEW)
+
+frame_esquerda= Frame(janela, width=150, height=265, bg=co4, relief="solid")
+frame_esquerda.grid(row=1, column=0,sticky=NSEW)
+
+frame_direita= Frame(janela, width=600, height=265, bg=co1, relief="raised")
+frame_direita.grid(row=1, column=1, sticky=NSEW)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
