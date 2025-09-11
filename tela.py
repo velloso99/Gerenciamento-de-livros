@@ -51,40 +51,35 @@ def novo_usuario():
     app_linha.grid(row=1, column=0, columnspan=4, sticky=NSEW)
 
     l_p_nome =Label(frame_direita, text="Primeiro Nome*", anchor=NW ,font=("Ivy 10"), bg=co1, fg=co4 )
-    l_p_nome.grid(row=2, column=0, padx=5, pady=3, sticky=NSEW)
+    l_p_nome.grid(row=2, column=0, padx=5, pady=5, sticky=NSEW)
     e_p_nome =Entry(frame_direita, width=25, justify='left', relief='solid')
-    e_p_nome.grid(row=2, column=1, padx=5, pady=3, sticky=NSEW)
+    e_p_nome.grid(row=2, column=1, padx=5, pady=5, sticky=NSEW)
 
     l_sobrenome =Label(frame_direita, text="Sobrenome*", anchor=NW ,font=("Ivy 10"), bg=co1, fg=co4 )
-    l_sobrenome.grid(row=3, column=0, padx=5, pady=3, sticky=NSEW)
+    l_sobrenome.grid(row=3, column=0, padx=5, pady=5, sticky=NSEW)
     e_sobrenome =Entry(frame_direita, width=25, justify='left', relief='solid')
-    e_sobrenome.grid(row=3, column=1, padx=5, pady=3, sticky=NSEW)
+    e_sobrenome.grid(row=3, column=1, padx=5, pady=5, sticky=NSEW)
 
     l_endereco =Label(frame_direita, text="Endereço do usuario*", anchor=NW ,font=("Ivy 10"), bg=co1, fg=co4 )
-    l_endereco.grid(row=4, column=0, padx=5, pady=3, sticky=NSEW)
+    l_endereco.grid(row=4, column=0, padx=5, pady=5, sticky=NSEW)
     e_endereco =Entry(frame_direita, width=25, justify='left', relief='solid')
-    e_endereco.grid(row=4, column=1, padx=5, pady=3, sticky=NSEW)
+    e_endereco.grid(row=4, column=1, padx=5, pady=5, sticky=NSEW)
 
     l_email =Label(frame_direita, text="Endereco do E-mail*", anchor=NW ,font=("Ivy 10"), bg=co1, fg=co4 )
-    l_email.grid(row=5, column=0, padx=5, pady=3, sticky=NSEW)
+    l_email.grid(row=5, column=0, padx=5, pady=5, sticky=NSEW)
     e_email =Entry(frame_direita, width=25, justify='left', relief='solid')
-    e_email.grid(row=5, column=1, padx=5, pady=3, sticky=NSEW)
+    e_email.grid(row=5, column=1, padx=5, pady=5, sticky=NSEW)
 
     l_contato =Label(frame_direita, text="Contato*", anchor=NW ,font=("Ivy 10"), bg=co1, fg=co4 )
-    l_contato.grid(row=6, column=0, padx=5, pady=3, sticky=NSEW)
+    l_contato.grid(row=6, column=0, padx=5, pady=5, sticky=NSEW)
     e_contato =Entry(frame_direita, width=25, justify='left', relief='solid')
-    e_contato.grid(row=6, column=1, padx=5, pady=3, sticky=NSEW)
+    e_contato.grid(row=6, column=1, padx=5, pady=5, sticky=NSEW)
 
-
-
-
-
-
-
-
-
-
-
+    img_salvar = Image.open('img/save.png')
+    img_salvar = img_salvar .resize((18,18))
+    img_salvar = ImageTk.PhotoImage(img_salvar )
+    b_salvar =Button(frame_direita, image=img_salvar, compound=LEFT, width=100 ,anchor=NW, text=' Salvar', bg=co1, fg=co4, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+    b_salvar.grid(row=7, column=1, sticky=NSEW, pady=6)
 
 
 
