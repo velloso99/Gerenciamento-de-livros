@@ -257,7 +257,7 @@ def ver_livros():
         frame_direita.grid_rowconfigure(0, weight=12)
 
         hd=["nw","nw","nw","nw","nw","nw"]
-        h=[20,80,80,120,120,76,100]
+        h=[20,165,110,120,50,50,100]
         n=0
 
         for col in list_header:
