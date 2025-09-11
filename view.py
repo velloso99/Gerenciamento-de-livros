@@ -32,20 +32,8 @@ def exibir_livros():
     conn = connect()
     livros = conn.execute("SELECT * FROM livros").fetchall()
     conn.close()
-
-    if not livros:
-        print("Nenhum livro encontrado na biblioteca")
-        return
-    print("livros na biblioteca")
-    for livro in livros:
-        print(f"id: {livro[0]}")
-        print(f"titulo: {livro[1]}")
-        print(f"Autor: {livro[2]}")
-        print(f"editora: {livro[3]}")
-        print(f"ano de Publicação: {livro[4]}")
-        print(f"ISBN: {livro[5]}")
-        print("\n")
-
+    return livros
+   
 # Função para realizar eprestimos
 def insert_loan(id_livro, id_usuario, data_emprestimo, data_devolucao):
     conn = connect()
