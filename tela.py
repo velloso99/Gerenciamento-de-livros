@@ -41,16 +41,39 @@ frame_direita.grid(row=1, column=1, sticky=NSEW)
 ################################################################################################
 #novo Usuario
 def novo_usuario():
-    
+
     global img_salvar
 
-    app_titulo =Label(frame_direita, text="Inserir um novo usuario", width=50, compound=LEFT, padx=5, pady=10, font=("Verdana 12"), bg=co1, fg=co4 )
+    app_titulo =Label(frame_direita, text="Inserir um novo usuario", width=50, compound=LEFT, padx=5, pady=10, font=("Verdana 12 bold"), bg=co1, fg=co4 )
     app_titulo.grid(row=0, column=0, columnspan=4, sticky=NSEW)
 
+    app_linha= Label(frame_direita, width=400, height=1, anchor=NW, font=('Verdana 1'), bg=co3, fg=co1)
+    app_linha.grid(row=1, column=0, columnspan=4, sticky=NSEW)
 
+    l_p_nome =Label(frame_direita, text="Primeiro Nome*", anchor=NW ,font=("Ivy 10"), bg=co1, fg=co4 )
+    l_p_nome.grid(row=2, column=0, padx=5, pady=3, sticky=NSEW)
+    e_p_nome =Entry(frame_direita, width=25, justify='left', relief='solid')
+    e_p_nome.grid(row=2, column=1, padx=5, pady=3, sticky=NSEW)
 
+    l_sobrenome =Label(frame_direita, text="Sobrenome*", anchor=NW ,font=("Ivy 10"), bg=co1, fg=co4 )
+    l_sobrenome.grid(row=3, column=0, padx=5, pady=3, sticky=NSEW)
+    e_sobrenome =Entry(frame_direita, width=25, justify='left', relief='solid')
+    e_sobrenome.grid(row=3, column=1, padx=5, pady=3, sticky=NSEW)
 
+    l_endereco =Label(frame_direita, text="Endereço do usuario*", anchor=NW ,font=("Ivy 10"), bg=co1, fg=co4 )
+    l_endereco.grid(row=4, column=0, padx=5, pady=3, sticky=NSEW)
+    e_endereco =Entry(frame_direita, width=25, justify='left', relief='solid')
+    e_endereco.grid(row=4, column=1, padx=5, pady=3, sticky=NSEW)
 
+    l_email =Label(frame_direita, text="Endereco do E-mail*", anchor=NW ,font=("Ivy 10"), bg=co1, fg=co4 )
+    l_email.grid(row=5, column=0, padx=5, pady=3, sticky=NSEW)
+    e_email =Entry(frame_direita, width=25, justify='left', relief='solid')
+    e_email.grid(row=5, column=1, padx=5, pady=3, sticky=NSEW)
+
+    l_contato =Label(frame_direita, text="Contato*", anchor=NW ,font=("Ivy 10"), bg=co1, fg=co4 )
+    l_contato.grid(row=6, column=0, padx=5, pady=3, sticky=NSEW)
+    e_contato =Entry(frame_direita, width=25, justify='left', relief='solid')
+    e_contato.grid(row=6, column=1, padx=5, pady=3, sticky=NSEW)
 
 
 
