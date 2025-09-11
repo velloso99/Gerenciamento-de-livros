@@ -52,6 +52,7 @@ def get_books_on_loan():
     conn.close()
     return result
 
+
 # Função para atualizar a data de devolução
 def upload_loang_return_date(id_emprestimo, data_devolucao):
     conn =connect()

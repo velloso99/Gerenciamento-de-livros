@@ -278,10 +278,12 @@ def realizar_emprestimo():
 
     def add():
 
+
+        id_user= e_id_usario.get()
         id_book = e_id_livro.get()
-        id_usuer= e_id_usario.get()
         
-        lista =[id_book, id_usuer]
+        
+        lista =[id_book, id_user]
 
         #Verificando caso algum campo esteja vazio ou não
         for i in lista:
@@ -290,9 +292,9 @@ def realizar_emprestimo():
                 return
 
         #inserindo os dados no banco de dados 
-        insert_loan(id_book, id_usuer)
+        insert_loan(id_book, id_user, None, None)
 
-        messagebox.showinfo('Sucesso', 'Usuario inserido com sucesso')
+        messagebox.showinfo('Sucesso', 'Emprestimo inserido com sucesso')
 
         #limpando os campos de entrada
         e_id_usario.delete(0,END)
@@ -320,6 +322,54 @@ def realizar_emprestimo():
     b_salvar = Button(frame_direita,command=add ,image=img_salvar, compound=LEFT, width=100 ,anchor=NW, text=' Salvar', bg=co1, fg=co4, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
     b_salvar.grid(row=7, column=1, sticky=NSEW, pady=6)
 
+####################################################################################################################
+#Ver livros Emprestados 
+def ver_livros_emprestados():
+
+        app_ = Label(frame_direita,text="Todos os livros Emprestados no momento",width=50,compound=LEFT, padx=5,pady=10, relief=FLAT, anchor=NW, font=('Verdana 12 bold'),bg=co1, fg=co4)
+        app_.grid(row=0, column=0, columnspan=3, sticky=NSEW)
+        l_linha = Label(frame_direita, width=400, height=1,anchor=NW, font=('Verdana 1 '), bg=co3, fg=co1)
+        l_linha.grid(row=1, column=0, columnspan=3, sticky=NSEW)
+
+        dados = []
+        books_on_loan = get_books_on_loan()
+        for book in  books_on_loan:
+            dado = [f"{book[0]}", f"{book[1]}", f"{book[2]} {book[3]}", f"{book[4]}", f"{book[5]}" ]
+
+            dados.append(dado)
+
+        #creating a treeview with dual scrollbars
+        list_header = ['ID','Titulo','Nome Usuario','Data Emprestimo','Data Devolução']
+    
+        global tree
+
+        tree = ttk.Treeview(frame_direita, selectmode="extended", columns=list_header, show="headings")
+        #vertical scrollbar
+        vsb = ttk.Scrollbar(frame_direita, orient="vertical", command=tree.yview)
+
+        #horizontal scrollbar
+        hsb = ttk.Scrollbar(frame_direita, orient="horizontal", command=tree.xview)
+
+        tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
+
+        tree.grid(column=0, row=2, sticky='nsew')
+        vsb.grid(column=1, row=2, sticky='ns')
+        hsb.grid(column=0, row=3, sticky='ew')
+        frame_direita.grid_rowconfigure(0, weight=12)
+
+        hd=["nw","nw","ne","ne","ne","ne"]
+        h=[20,175,120,90,90,100,100]
+        n=0
+
+        for col in list_header:
+            tree.heading(col, text=col, anchor='nw')
+            #adjust the column's width to the header string
+            tree.column(col, width=h[n],anchor=hd[n])
+        
+            n+=1
+
+        for item in dados:
+            tree.insert('', 'end', values=item)
 
 
 
@@ -365,7 +415,12 @@ def control(i):
         # Chamando a função emprestimo de livros
         realizar_emprestimo()
 
-
+    # Ver Livros Emprestados
+    if i == 'ver livros emprestados':
+        for windget in frame_direita.winfo_children():
+            windget.destroy()
+        # Chamando a função ver livros emprstados
+        ver_livros_emprestados()
 
 
 
@@ -432,7 +487,7 @@ b_devolucao_emprestimos.grid(row=5, column=0, sticky=NSEW, padx=5, pady=6)
 img_livros_emprestados = Image.open('img/book.png')
 img_livros_emprestados = img_livros_emprestados .resize((18,18))
 img_livros_emprestados = ImageTk.PhotoImage(img_livros_emprestados )
-b_livros_emprestados = Button(frame_esquerda, image=img_livros_emprestados, compound=LEFT, anchor=NW, text=' Livros emprestado no momento', bg=co4, fg=co1, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+b_livros_emprestados = Button(frame_esquerda, command=lambda:control('ver livros emprestados') , image=img_livros_emprestados, compound=LEFT, anchor=NW, text=' Livros emprestado no momento', bg=co4, fg=co1, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
 b_livros_emprestados.grid(row=6, column=0, sticky=NSEW, padx=5, pady=6)
 #########################################################################################################################################################################################################################
 
