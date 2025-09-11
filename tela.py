@@ -38,6 +38,52 @@ frame_esquerda.grid(row=1, column=0,sticky=NSEW)
 
 frame_direita= Frame(janela, width=600, height=265, bg=co1, relief="raised")
 frame_direita.grid(row=1, column=1, sticky=NSEW)
+################################################################################################
+#novo Usuario
+def novo_usuario():
+    
+    global img_salvar
+
+    app_titulo =Label(frame_direita, text="Inserir um novo usuario", width=50, compound=LEFT, padx=5, pady=10, font=("Verdana 12"), bg=co1, fg=co4 )
+    app_titulo.grid(row=0, column=0, columnspan=4, sticky=NSEW)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+################################################################################################
+# Configuração
+#Função para controlar o menu
+def control(i):
+    #novo usuario
+    if i == 'novo usuario':
+        for windget in frame_direita.winfo_children():
+            windget.destroy()
+        # Chamando a função novo usuario
+        novo_usuario()
+
+
+
+
+
+
+
+
+
 
 #################################################################################################
 # Logo 
@@ -60,7 +106,7 @@ app_linha.place(x=0, y=47)
 img_usuario = Image.open('img/add.png')
 img_usuario = img_usuario .resize((18,18))
 img_usuario = ImageTk.PhotoImage(img_usuario )
-b_usuario =Button(frame_esquerda, image=img_usuario, compound=LEFT, anchor=NW, text=' Novo Usuario', bg=co4, fg=co1, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+b_usuario =Button(frame_esquerda,command=lambda:control('novo usuario') ,image=img_usuario, compound=LEFT, anchor=NW, text=' Novo Usuario', bg=co4, fg=co1, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
 b_usuario.grid(row=0, column=0, sticky=NSEW, padx=5, pady=6)
 
 # Abrir imagem novo livro
@@ -104,6 +150,7 @@ img_livros_emprestados = img_livros_emprestados .resize((18,18))
 img_livros_emprestados = ImageTk.PhotoImage(img_livros_emprestados )
 b_livros_emprestados = Button(frame_esquerda, image=img_livros_emprestados, compound=LEFT, anchor=NW, text=' Livros emprestado no momento', bg=co4, fg=co1, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
 b_livros_emprestados.grid(row=6, column=0, sticky=NSEW, padx=5, pady=6)
+#########################################################################################################################################################################################################################
 
 
 
