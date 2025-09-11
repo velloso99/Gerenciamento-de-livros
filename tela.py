@@ -1,6 +1,10 @@
 from tkinter .ttk import*
 from  tkinter import *
 from PIL import Image, ImageTk
+from tkinter import messagebox
+
+#Importando as funções da Viewa
+from view import *
 
 from colors import *
 
@@ -38,11 +42,37 @@ frame_esquerda.grid(row=1, column=0,sticky=NSEW)
 
 frame_direita= Frame(janela, width=600, height=265, bg=co1, relief="raised")
 frame_direita.grid(row=1, column=1, sticky=NSEW)
+
 ################################################################################################
 #novo Usuario
 def novo_usuario():
 
     global img_salvar
+
+    def add():
+
+        first_name = e_p_nome.get()
+        last_name = e_sobrenome.get()
+        andress = e_endereco.get()
+        email = e_email.get()
+        phone = e_contato.get()
+
+        lista =[first_name,last_name,andress,email,phone]
+
+        #Verificando caso algum campo esteja vazio ou não
+        for i in lista:
+            if i == '':
+                messagebox.showerror('Erro', "Preencha todos os campos")
+                return
+
+        #inserindo os dados no banco de dados 
+        insert_user(first_name,last_name,andress,email,phone)
+        #limpando os campos de entrada
+        e_p_nome.delete(0,END)
+        e_sobrenome.delete(0,END)
+        e_endereco.delete(0,END)
+        e_email.delete(0,END)
+        e_contato.delete(0,END)
 
     app_titulo =Label(frame_direita, text="Inserir um novo usuario", width=50, compound=LEFT, padx=5, pady=10, font=("Verdana 12 bold"), bg=co1, fg=co4 )
     app_titulo.grid(row=0, column=0, columnspan=4, sticky=NSEW)
@@ -78,7 +108,7 @@ def novo_usuario():
     img_salvar = Image.open('img/save.png')
     img_salvar = img_salvar .resize((18,18))
     img_salvar = ImageTk.PhotoImage(img_salvar )
-    b_salvar =Button(frame_direita, image=img_salvar, compound=LEFT, width=100 ,anchor=NW, text=' Salvar', bg=co1, fg=co4, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+    b_salvar = Button(frame_direita,command=add ,image=img_salvar, compound=LEFT, width=100 ,anchor=NW, text=' Salvar', bg=co1, fg=co4, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
     b_salvar.grid(row=7, column=1, sticky=NSEW, pady=6)
 
 
