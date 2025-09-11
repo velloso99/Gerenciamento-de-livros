@@ -269,7 +269,8 @@ def ver_livros():
 
         for item in dados:
             tree.insert('', 'end', values=item)
-
+            
+###############################################################################################################
 
 
 ################################################################################################
@@ -301,7 +302,7 @@ def control(i):
     if i == 'ver livros':
         for windget in frame_direita.winfo_children():
             windget.destroy()
-        # Chamando a função novo usuario
+        # Chamando a função ver livros
         ver_livros()
 
 
