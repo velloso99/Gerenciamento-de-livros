@@ -70,6 +70,51 @@ img_livro = ImageTk.PhotoImage(img_livro )
 b_livro =Button(frame_esquerda, image=img_livro, compound=LEFT, anchor=NW, text=' Novo Livro', bg=co4, fg=co1, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
 b_livro.grid(row=1, column=0, sticky=NSEW, padx=5, pady=6)
 
+# Abrir imagem ver livros
+img_ver_livro = Image.open('img/logo.png')
+img_ver_livro = img_ver_livro .resize((18,18))
+img_ver_livro = ImageTk.PhotoImage(img_ver_livro )
+b_ver_livro =Button(frame_esquerda, image=img_ver_livro, compound=LEFT, anchor=NW, text=' Exibir todo os livros', bg=co4, fg=co1, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+b_ver_livro.grid(row=2, column=0, sticky=NSEW, padx=5, pady=6)
+
+# Abrir imagem ver Usuarios
+img_ver_usuarios = Image.open('img/user.png')
+img_ver_usuarios = img_ver_usuarios .resize((18,18))
+img_ver_usuarios = ImageTk.PhotoImage(img_ver_usuarios )
+b_ver_usuarios =Button(frame_esquerda, image=img_ver_usuarios, compound=LEFT, anchor=NW, text=' Exibir todos os Usuarios', bg=co4, fg=co1, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+b_ver_usuarios.grid(row=3, column=0, sticky=NSEW, padx=5, pady=6)
+
+# Abrir imagem Realizar um emprestimo
+img_emprestimos = Image.open('img/add.png')
+img_emprestimos = img_emprestimos .resize((18,18))
+img_emprestimos = ImageTk.PhotoImage(img_emprestimos )
+b_emprestimos = Button(frame_esquerda, image=img_emprestimos, compound=LEFT, anchor=NW, text=' Realizar emprestimos', bg=co4, fg=co1, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+b_emprestimos.grid(row=4, column=0, sticky=NSEW, padx=5, pady=6)
+
+# Abrir imagem devolução de  um emprestimo
+img_devolucao_emprestimos = Image.open('img/update.png')
+img_devolucao_emprestimos = img_devolucao_emprestimos .resize((18,18))
+img_devolucao_emprestimos = ImageTk.PhotoImage(img_devolucao_emprestimos )
+b_devolucao_emprestimos = Button(frame_esquerda, image=img_devolucao_emprestimos, compound=LEFT, anchor=NW, text=' Devolução de livros', bg=co4, fg=co1, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+b_devolucao_emprestimos.grid(row=5, column=0, sticky=NSEW, padx=5, pady=6)
+
+# Abrir imagem livros emprestados
+img_livros_emprestados = Image.open('img/book.png')
+img_livros_emprestados = img_livros_emprestados .resize((18,18))
+img_livros_emprestados = ImageTk.PhotoImage(img_livros_emprestados )
+b_livros_emprestados = Button(frame_esquerda, image=img_livros_emprestados, compound=LEFT, anchor=NW, text=' Livros emprestado no momento', bg=co4, fg=co1, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+b_livros_emprestados.grid(row=6, column=0, sticky=NSEW, padx=5, pady=6)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
