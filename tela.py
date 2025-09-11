@@ -1,3 +1,4 @@
+from tkinter import ttk
 from tkinter .ttk import*
 from  tkinter import *
 from PIL import Image, ImageTk
@@ -67,6 +68,9 @@ def novo_usuario():
 
         #inserindo os dados no banco de dados 
         insert_user(first_name,last_name,andress,email,phone)
+
+        messagebox.showinfo('Sucesso', 'Usuario inserido com sucesso')
+
         #limpando os campos de entrada
         e_p_nome.delete(0,END)
         e_sobrenome.delete(0,END)
@@ -110,6 +114,50 @@ def novo_usuario():
     img_salvar = ImageTk.PhotoImage(img_salvar )
     b_salvar = Button(frame_direita,command=add ,image=img_salvar, compound=LEFT, width=100 ,anchor=NW, text=' Salvar', bg=co1, fg=co4, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
     b_salvar.grid(row=7, column=1, sticky=NSEW, pady=6)
+#####################################################################################################################
+#Ver Usuario
+def ver_usuarios():
+
+        app_ = Label(frame_direita,text="Todos os usuários do banco de dados",width=50,compound=LEFT, padx=5,pady=10, relief=FLAT, anchor=NW, font=('Verdana 12 bold'),bg=co1, fg=co4)
+        app_.grid(row=0, column=0, columnspan=3, sticky=NSEW)
+        l_linha = Label(frame_direita, width=400, height=1,anchor=NW, font=('Verdana 1 '), bg=co3, fg=co1)
+        l_linha.grid(row=1, column=0, columnspan=3, sticky=NSEW)
+
+        dados = get_user()
+
+        #creating a treeview with dual scrollbars
+        list_header = ['ID','Nome','Sobrenome','Endereço','Email','Contato']
+    
+        global tree
+
+        tree = ttk.Treeview(frame_direita, selectmode="extended", columns=list_header, show="headings")
+        #vertical scrollbar
+        vsb = ttk.Scrollbar(frame_direita, orient="vertical", command=tree.yview)
+
+        #horizontal scrollbar
+        hsb = ttk.Scrollbar(frame_direita, orient="horizontal", command=tree.xview)
+
+        tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
+
+        tree.grid(column=0, row=2, sticky='nsew')
+        vsb.grid(column=1, row=2, sticky='ns')
+        hsb.grid(column=0, row=3, sticky='ew')
+        frame_direita.grid_rowconfigure(0, weight=12)
+
+        hd=["nw","nw","nw","nw","nw","nw"]
+        h=[20,80,80,120,120,76,100]
+        n=0
+
+        for col in list_header:
+            tree.heading(col, text=col, anchor='nw')
+            #adjust the column's width to the header string
+            tree.column(col, width=h[n],anchor=hd[n])
+        
+            n+=1
+
+        for item in dados:
+            tree.insert('', 'end', values=item)
+
 
 
 
@@ -124,6 +172,12 @@ def control(i):
         # Chamando a função novo usuario
         novo_usuario()
 
+    #Ver usuario
+    if i == 'ver usuarios':
+        for windget in frame_direita.winfo_children():
+            windget.destroy()
+        # Chamando a função novo usuario
+        ver_usuarios()
 
 
 
@@ -175,7 +229,7 @@ b_ver_livro.grid(row=2, column=0, sticky=NSEW, padx=5, pady=6)
 img_ver_usuarios = Image.open('img/user.png')
 img_ver_usuarios = img_ver_usuarios .resize((18,18))
 img_ver_usuarios = ImageTk.PhotoImage(img_ver_usuarios )
-b_ver_usuarios =Button(frame_esquerda, image=img_ver_usuarios, compound=LEFT, anchor=NW, text=' Exibir todos os Usuarios', bg=co4, fg=co1, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+b_ver_usuarios =Button(frame_esquerda, command=lambda:control('ver usuarios')  ,image=img_ver_usuarios, compound=LEFT, anchor=NW, text=' Exibir todos os Usuarios', bg=co4, fg=co1, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
 b_ver_usuarios.grid(row=3, column=0, sticky=NSEW, padx=5, pady=6)
 
 # Abrir imagem Realizar um emprestimo

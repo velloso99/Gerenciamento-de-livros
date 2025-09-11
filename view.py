@@ -18,6 +18,14 @@ def insert_user(nome, sobrenome, endereco, email, contato):
     conn.execute("INSERT INTO usuarios(nome, sobrenome, endereco, email, contato) values(?,?,?,?,?)", (nome, sobrenome, endereco, email, contato))
     conn.commit()
     conn.close()
+#ver Usuarios
+def get_user():
+    conn = connect()
+    c = conn.cursor()
+    c.execute("SELECT * FROM usuarios")
+    users = c.fetchall()
+    conn.close()
+    return users
 
 # Função para exibir os livros
 def exibir_livros():
