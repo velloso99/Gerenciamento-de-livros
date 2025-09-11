@@ -269,8 +269,61 @@ def ver_livros():
 
         for item in dados:
             tree.insert('', 'end', values=item)
-            
+
 ###############################################################################################################
+# Realizar emprestimos
+def realizar_emprestimo():
+
+    global img_salvar
+
+    def add():
+
+        id_book = e_id_livro.get()
+        id_usuer= e_id_usario.get()
+        
+        lista =[id_book, id_usuer]
+
+        #Verificando caso algum campo esteja vazio ou não
+        for i in lista:
+            if i == '':
+                messagebox.showerror('Erro', "Preencha todos os campos")
+                return
+
+        #inserindo os dados no banco de dados 
+        insert_loan(id_book, id_usuer)
+
+        messagebox.showinfo('Sucesso', 'Usuario inserido com sucesso')
+
+        #limpando os campos de entrada
+        e_id_usario.delete(0,END)
+        e_id_livro.delete(0,END)
+       
+
+    app_titulo =Label(frame_direita, text="Realizar um  Emprestimo", width=50, compound=LEFT, padx=5, pady=10, font=("Verdana 12 bold"), bg=co1, fg=co4 )
+    app_titulo.grid(row=0, column=0, columnspan=4, sticky=NSEW)
+    app_linha= Label(frame_direita, width=400, height=1, anchor=NW, font=('Verdana 1'), bg=co3, fg=co1)
+    app_linha.grid(row=1, column=0, columnspan=4, sticky=NSEW)
+
+    l_id_usario =Label(frame_direita, text="Digite o ID do usuario*", anchor=NW ,font=("Ivy 10"), bg=co1, fg=co4 )
+    l_id_usario.grid(row=2, column=0, padx=5, pady=5, sticky=NSEW)
+    e_id_usario =Entry(frame_direita, width=25, justify='left', relief='solid')
+    e_id_usario.grid(row=2, column=1, padx=5, pady=5, sticky=NSEW)
+
+    l_id_livro =Label(frame_direita, text="Digite o ID do livro*", anchor=NW ,font=("Ivy 10"), bg=co1, fg=co4 )
+    l_id_livro.grid(row=3, column=0, padx=5, pady=5, sticky=NSEW)
+    e_id_livro =Entry(frame_direita, width=25, justify='left', relief='solid')
+    e_id_livro.grid(row=3, column=1, padx=5, pady=5, sticky=NSEW)
+
+    img_salvar = Image.open('img/save.png')
+    img_salvar = img_salvar .resize((18,18))
+    img_salvar = ImageTk.PhotoImage(img_salvar )
+    b_salvar = Button(frame_direita,command=add ,image=img_salvar, compound=LEFT, width=100 ,anchor=NW, text=' Salvar', bg=co1, fg=co4, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+    b_salvar.grid(row=7, column=1, sticky=NSEW, pady=6)
+
+
+
+
+
 
 
 ################################################################################################
@@ -305,7 +358,12 @@ def control(i):
         # Chamando a função ver livros
         ver_livros()
 
-
+    #emprestimo de livros
+    if i == 'emprestimo livros':
+        for windget in frame_direita.winfo_children():
+            windget.destroy()
+        # Chamando a função emprestimo de livros
+        realizar_emprestimo()
 
 
 
@@ -360,7 +418,7 @@ b_ver_usuarios.grid(row=3, column=0, sticky=NSEW, padx=5, pady=6)
 img_emprestimos = Image.open('img/add.png')
 img_emprestimos = img_emprestimos .resize((18,18))
 img_emprestimos = ImageTk.PhotoImage(img_emprestimos )
-b_emprestimos = Button(frame_esquerda, image=img_emprestimos, compound=LEFT, anchor=NW, text=' Realizar emprestimos', bg=co4, fg=co1, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+b_emprestimos = Button(frame_esquerda,command=lambda:control('emprestimo livros') ,image=img_emprestimos, compound=LEFT, anchor=NW, text=' Realizar emprestimos', bg=co4, fg=co1, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
 b_emprestimos.grid(row=4, column=0, sticky=NSEW, padx=5, pady=6)
 
 # Abrir imagem devolução de  um emprestimo
