@@ -388,7 +388,7 @@ def devolução_emprestimo():
     def add():
 
 
-        id_loan= e_id_emprstimo.get()
+        id_loan= int(e_id_emprstimo.get())
         date_return = e_data_retorno.get()
         
         
@@ -430,7 +430,6 @@ def devolução_emprestimo():
     img_salvar = ImageTk.PhotoImage(img_salvar )
     b_salvar = Button(frame_direita,command=add ,image=img_salvar, compound=LEFT, width=100 ,anchor=NW, text=' Salvar', bg=co1, fg=co4, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
     b_salvar.grid(row=7, column=1, sticky=NSEW, pady=6)
-
 
 ################################################################################################
 # Configuração

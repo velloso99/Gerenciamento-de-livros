@@ -54,8 +54,8 @@ def get_books_on_loan():
 
 # Função para atualizar a data de devolução
 def upload_loang_return_date(id_emprestimo, data_devolucao):
-    conn =connect()
-    conn.execute("UPDATE emprestimos SET data_devolucao =? WHERE id=?",(id_emprestimo, data_devolucao))
+    conn = connect()
+    conn.execute("UPDATE emprestimos SET data_devolucao =? WHERE id=?",(data_devolucao, id_emprestimo ))
     conn.commit()
     conn.close()
 
