@@ -326,54 +326,49 @@ def realizar_emprestimo():
 #Ver livros Emprestados 
 def ver_livros_emprestados():
 
-        app_ = Label(frame_direita,text="Todos os livros Emprestados no momento",width=50,compound=LEFT, padx=5,pady=10, relief=FLAT, anchor=NW, font=('Verdana 12 bold'),bg=co1, fg=co4)
-        app_.grid(row=0, column=0, columnspan=3, sticky=NSEW)
-        l_linha = Label(frame_direita, width=400, height=1,anchor=NW, font=('Verdana 1 '), bg=co3, fg=co1)
-        l_linha.grid(row=1, column=0, columnspan=3, sticky=NSEW)
+    app_ = Label(frame_direita,text="Todos os livros Emprestados no momento",width=50,compound=LEFT, padx=5,pady=10, relief=FLAT, anchor=NW, font=('Verdana 12 bold'),bg=co1, fg=co4)
+    app_.grid(row=0, column=0, columnspan=3, sticky=NSEW)
+    l_linha = Label(frame_direita, width=400, height=1,anchor=NW, font=('Verdana 1 '), bg=co3, fg=co1)
+    l_linha.grid(row=1, column=0, columnspan=3, sticky=NSEW)
 
-        dados = []
-        books_on_loan = get_books_on_loan()
-        for book in  books_on_loan:
-            dado = [f"{book[0]}", f"{book[1]}", f"{book[2]} {book[3]}", f"{book[4]}", f"{book[5]}" ]
+    dados = []
+    books_on_loan = get_books_on_loan()
+    for book in  books_on_loan:
+        dado = [f"{book[0]}", f"{book[1]}", f"{book[2]} {book[3]}", f"{book[4]}", f"{book[5]}"]
+        dados.append(dado)
 
-            dados.append(dado)
-
-        #creating a treeview with dual scrollbars
-        list_header = ['ID','Titulo','Nome Usuario','Data Emprestimo','Data Devolução']
+    #creating a treeview with dual scrollbars
+    list_header = ['ID','Titulo','Nome do Usuario','D. Emprestimo','D. Devolução']
     
-        global tree
+    global tree
 
-        tree = ttk.Treeview(frame_direita, selectmode="extended", columns=list_header, show="headings")
-        #vertical scrollbar
-        vsb = ttk.Scrollbar(frame_direita, orient="vertical", command=tree.yview)
+    tree = ttk.Treeview(frame_direita, selectmode="extended", columns=list_header, show="headings")
+    #vertical scrollbar
+    vsb = ttk.Scrollbar(frame_direita, orient="vertical", command=tree.yview)
 
-        #horizontal scrollbar
-        hsb = ttk.Scrollbar(frame_direita, orient="horizontal", command=tree.xview)
+    #horizontal scrollbar
+    hsb = ttk.Scrollbar(frame_direita, orient="horizontal", command=tree.xview)
 
-        tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
+    tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
 
-        tree.grid(column=0, row=2, sticky='nsew')
-        vsb.grid(column=1, row=2, sticky='ns')
-        hsb.grid(column=0, row=3, sticky='ew')
-        frame_direita.grid_rowconfigure(0, weight=12)
+    tree.grid(column=0, row=2, sticky='nsew')
+    vsb.grid(column=1, row=2, sticky='ns')
+    hsb.grid(column=0, row=3, sticky='ew')
+    frame_direita.grid_rowconfigure(0, weight=12)
 
-        hd=["nw","nw","ne","ne","ne","ne"]
-        h=[20,175,120,90,90,100,100]
-        n=0
+    hd=["nw","nw","ne","ne","ne","ne"]
+    h=[20,175,120,90,90,100,100]
+    n=0
 
-        for col in list_header:
-            tree.heading(col, text=col, anchor='nw')
-            #adjust the column's width to the header string
-            tree.column(col, width=h[n],anchor=hd[n])
+    for col in list_header:
+        tree.heading(col, text=col, anchor='nw')
+        #adjust the column's width to the header string
+        tree.column(col, width=h[n],anchor=hd[n])
         
-            n+=1
+        n+=1
 
-        for item in dados:
-            tree.insert('', 'end', values=item)
-
-
-
-
+    for item in dados:
+        tree.insert('', 'end', values=item)
 
 
 ################################################################################################
