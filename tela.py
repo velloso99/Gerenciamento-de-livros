@@ -326,19 +326,18 @@ def realizar_emprestimo():
 #Ver livros Emprestados 
 def ver_livros_emprestados():
 
-    app_ = Label(frame_direita,text="Todos os livros Emprestados no momento",width=50,compound=LEFT, padx=5,pady=10, relief=FLAT, anchor=NW, font=('Verdana 12 bold'),bg=co1, fg=co4)
+    app_ = Label(frame_direita,text="Todos os Livross Eprestados",width=50,compound=LEFT, padx=5,pady=10, relief=FLAT, anchor=NW, font=('Verdana 12 bold'),bg=co1, fg=co4)
     app_.grid(row=0, column=0, columnspan=3, sticky=NSEW)
     l_linha = Label(frame_direita, width=400, height=1,anchor=NW, font=('Verdana 1 '), bg=co3, fg=co1)
     l_linha.grid(row=1, column=0, columnspan=3, sticky=NSEW)
 
     dados = []
+
     books_on_loan = get_books_on_loan()
-    for book in  books_on_loan:
-        dado = [f"{book[0]}", f"{book[1]}", f"{book[2]} {book[3]}", f"{book[4]}", f"{book[5]}"]
-        dados.append(dado)
+    
 
     #creating a treeview with dual scrollbars
-    list_header = ['ID','Titulo','Nome do Usuario','D. Emprestimo','D. Devolução']
+    list_header = ['ID','Titulo','Nome do Usuario','D. Emprestimos','D. Devolução']
     
     global tree
 
@@ -356,8 +355,8 @@ def ver_livros_emprestados():
     hsb.grid(column=0, row=3, sticky='ew')
     frame_direita.grid_rowconfigure(0, weight=12)
 
-    hd=["nw","nw","ne","ne","ne","ne"]
-    h=[20,175,120,90,90,100,100]
+    hd=["nw","nw","nw","nw","nw","nw"]
+    h=[20,80,80,120,120,76,100]
     n=0
 
     for col in list_header:
@@ -370,6 +369,7 @@ def ver_livros_emprestados():
     for item in dados:
         tree.insert('', 'end', values=item)
 
+    
 
 ################################################################################################
 # Configuração
@@ -414,7 +414,7 @@ def control(i):
     if i == 'ver livros emprestados':
         for windget in frame_direita.winfo_children():
             windget.destroy()
-        # Chamando a função ver livros emprstados
+        # Chamando a função ver livros emprestados
         ver_livros_emprestados()
 
 
