@@ -332,7 +332,7 @@ def realizar_emprestimo():
 #Ver livros Emprestados 
 def ver_livros_emprestados():
 
-    app_ = Label(frame_direita,text="Todos os Livross Eprestados",width=50,compound=LEFT, padx=5,pady=10, relief=FLAT, anchor=NW, font=('Verdana 12 bold'),bg=co1, fg=co4)
+    app_ = Label(frame_direita,text="Todos os Livros Eprestados",width=50,compound=LEFT, padx=5,pady=10, relief=FLAT, anchor=NW, font=('Verdana 12 bold'),bg=co1, fg=co4)
     app_.grid(row=0, column=0, columnspan=3, sticky=NSEW)
     l_linha = Label(frame_direita, width=400, height=1,anchor=NW, font=('Verdana 1 '), bg=co3, fg=co1)
     l_linha.grid(row=1, column=0, columnspan=3, sticky=NSEW)
@@ -342,12 +342,12 @@ def ver_livros_emprestados():
     books_on_loan = get_books_on_loan()
 
     for book in books_on_loan:
-        dado = [f"{book[0]}", f"{book[1]} {book[2]}", f"{book[3]}", f"{book[4]}"]
+        dado = [f"{book[0]}", f"{book[1]}", f"{book[2]} {book[3]}", f"{book[4]}"]
 
         dados.append(dado)
 
     #creating a treeview with dual scrollbars
-    list_header = ['Titulo','Nome do Usuario','D. Emprestimos','D. Devolução']
+    list_header = ['ID','Titulo','Nome do Usuario','D. Emprestimos','D. Devolução']
     
     global tree
 
@@ -365,8 +365,8 @@ def ver_livros_emprestados():
     hsb.grid(column=0, row=3, sticky='ew')
     frame_direita.grid_rowconfigure(0, weight=12)
 
-    hd=["nw","ne","ne","ne","ne"]
-    h=[175,120,90,90,100,100]
+    hd=["nw","nw","ne","ne","ne","ne"]
+    h=[20,175,120,90,90,100,100]
     n=0
 
     for col in list_header:
@@ -379,7 +379,58 @@ def ver_livros_emprestados():
     for item in dados:
         tree.insert('', 'end', values=item)
 
-    
+######################################################################################################################
+#Devolução de livreos
+def devolução_emprestimo():
+
+    global img_salvar
+
+    def add():
+
+
+        id_loan= e_id_emprstimo.get()
+        date_return = e_data_retorno.get()
+        
+        
+        lista =[id_loan, date_return]
+
+        #Verificando caso algum campo esteja vazio ou não
+        for i in lista:
+            if i == '':
+                messagebox.showerror('Erro', "Preencha todos os campos")
+                return
+
+        #inserindo os dados no banco de dados 
+        upload_loang_return_date(id_loan, date_return)
+
+        messagebox.showinfo('Sucesso', 'Livro retornado com sucesso com sucesso')
+
+        #limpando os campos de entrada
+        e_id_emprstimo.delete(0,END)
+        e_data_retorno.delete(0,END)
+       
+
+    app_titulo =Label(frame_direita, text="Atualizar a data devolução de um emprestimo", width=50, compound=LEFT, padx=5, pady=10, font=("Verdana 12 bold"), bg=co1, fg=co4 )
+    app_titulo.grid(row=0, column=0, columnspan=4, sticky=NSEW)
+    app_linha= Label(frame_direita, width=400, height=1, anchor=NW, font=('Verdana 1'), bg=co3, fg=co1)
+    app_linha.grid(row=1, column=0, columnspan=4, sticky=NSEW)
+
+    l_id_emprstimo =Label(frame_direita, text="ID Emprestimo*", anchor=NW ,font=("Ivy 10"), bg=co1, fg=co4 )
+    l_id_emprstimo.grid(row=2, column=0, padx=5, pady=5, sticky=NSEW)
+    e_id_emprstimo =Entry(frame_direita, width=25, justify='left', relief='solid')
+    e_id_emprstimo.grid(row=2, column=1, padx=5, pady=5, sticky=NSEW)
+
+    l_data_retorno =Label(frame_direita, text="Nova data de devolução (Formato: AAAA/MM/DD)*", anchor=NW ,font=("Ivy 10"), bg=co1, fg=co4 )
+    l_data_retorno.grid(row=3, column=0, padx=5, pady=5, sticky=NSEW)
+    e_data_retorno =Entry(frame_direita, width=25, justify='left', relief='solid')
+    e_data_retorno.grid(row=3, column=1, padx=5, pady=5, sticky=NSEW)
+
+    img_salvar = Image.open('img/save.png')
+    img_salvar = img_salvar .resize((18,18))
+    img_salvar = ImageTk.PhotoImage(img_salvar )
+    b_salvar = Button(frame_direita,command=add ,image=img_salvar, compound=LEFT, width=100 ,anchor=NW, text=' Salvar', bg=co1, fg=co4, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+    b_salvar.grid(row=7, column=1, sticky=NSEW, pady=6)
+
 
 ################################################################################################
 # Configuração
@@ -427,7 +478,12 @@ def control(i):
         # Chamando a função ver livros emprestados
         ver_livros_emprestados()
 
-
+    # devolução de livros
+    if i == 'devolucao de livros':
+        for windget in frame_direita.winfo_children():
+            windget.destroy()
+        # Chamando a função devolução  de livreos
+        devolução_emprestimo()
 
 #################################################################################################
 # Logo 
@@ -485,7 +541,7 @@ b_emprestimos.grid(row=4, column=0, sticky=NSEW, padx=5, pady=6)
 img_devolucao_emprestimos = Image.open('img/update.png')
 img_devolucao_emprestimos = img_devolucao_emprestimos .resize((18,18))
 img_devolucao_emprestimos = ImageTk.PhotoImage(img_devolucao_emprestimos )
-b_devolucao_emprestimos = Button(frame_esquerda, image=img_devolucao_emprestimos, compound=LEFT, anchor=NW, text=' Devolução de livros', bg=co4, fg=co1, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
+b_devolucao_emprestimos = Button(frame_esquerda, command=lambda:control('devolucao de livros')  ,image=img_devolucao_emprestimos, compound=LEFT, anchor=NW, text=' Devolução de livros', bg=co4, fg=co1, font=('Ivy 11'), overrelief=RIDGE, relief=GROOVE)
 b_devolucao_emprestimos.grid(row=5, column=0, sticky=NSEW, padx=5, pady=6)
 
 # Abrir imagem livros emprestados

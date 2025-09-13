@@ -44,11 +44,11 @@ def insert_loan(id_livro, id_usuario, data_emprestimo, data_devolucao):
 # Função exibiro todos os livreos emprestados
 def get_books_on_loan():
     conn = connect()
-    result = conn.execute("SELECT livros.titulo, usuarios.nome, usuarios.sobrenome, emprestimos.data_emprestimo, emprestimos.data_devolucao\
-                            FROM livros\
-                            INNER JOIN emprestimos ON livros.id = emprestimos.id_livros\
-                            INNER JOIN usuarios ON usuarios.id = emprestimos.id_usuarios\
-                            WHERE emprestimos.data_devolucao IS NULL").fetchall()
+    result = conn.execute("SELECT emprestimos.id, livros.titulo, usuarios.nome, usuarios.sobrenome, emprestimos.data_emprestimo, emprestimos.data_devolucao \
+                           FROM livros \
+                           INNER JOIN emprestimos ON livros.id = emprestimos.id_livros \
+                           INNER JOIN usuarios ON usuarios.id = emprestimos.id_usuarios \
+                           WHERE emprestimos.data_devolucao IS NULL").fetchall()
     conn.close()
     return result
 
