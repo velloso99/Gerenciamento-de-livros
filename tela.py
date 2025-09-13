@@ -3,11 +3,17 @@ from tkinter .ttk import*
 from  tkinter import *
 from PIL import Image, ImageTk
 from tkinter import messagebox
+#importar calendario e data
+from tkcalendar import Calendar, DateEntry
+from datetime import date
+from datetime import datetime
 
 #Importando as funções da Viewa
 from view import *
 
 from colors import *
+
+hoje = datetime.today()
 
 
 ###########################################################################################
@@ -292,7 +298,7 @@ def realizar_emprestimo():
                 return
 
         #inserindo os dados no banco de dados 
-        insert_loan(id_book, id_user, None, None)
+        insert_loan(id_book, id_user, hoje, None)
 
         messagebox.showinfo('Sucesso', 'Emprestimo inserido com sucesso')
 
@@ -334,10 +340,14 @@ def ver_livros_emprestados():
     dados = []
 
     books_on_loan = get_books_on_loan()
-    
+
+    for book in books_on_loan:
+        dado = [f"{book[0]}", f"{book[1]} {book[2]}", f"{book[3]}", f"{book[4]}"]
+
+        dados.append(dado)
 
     #creating a treeview with dual scrollbars
-    list_header = ['ID','Titulo','Nome do Usuario','D. Emprestimos','D. Devolução']
+    list_header = ['Titulo','Nome do Usuario','D. Emprestimos','D. Devolução']
     
     global tree
 
@@ -355,8 +365,8 @@ def ver_livros_emprestados():
     hsb.grid(column=0, row=3, sticky='ew')
     frame_direita.grid_rowconfigure(0, weight=12)
 
-    hd=["nw","nw","nw","nw","nw","nw"]
-    h=[20,80,80,120,120,76,100]
+    hd=["nw","ne","ne","ne","ne"]
+    h=[175,120,90,90,100,100]
     n=0
 
     for col in list_header:
